@@ -1,0 +1,13 @@
+node_modules
+package-lock.json
+.env.*
+config/.env.*
+!config/.env.example
+reports/*
+.DS_Store
+Thumbs.db
+.claude/settings.local.json
+.claude
+.mcp.json
+.vscode
+petscreening-challenge.code-workspace

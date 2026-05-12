@@ -1,0 +1,24 @@
+{
+  "name": "petscreening-challenge",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "cucumber-js",
+    "test:ui": "cucumber-js --profile ui",
+    "test:ui:headed": "HEADED=true cucumber-js --profile ui",
+    "test:ui:firefox": "BROWSER=firefox cucumber-js --profile ui",
+    "test:ui:firefox:headed": "BROWSER=firefox HEADED=true cucumber-js --profile ui",
+    "test:ui:safari": "BROWSER=webkit cucumber-js --profile ui",
+    "test:ui:safari:headed": "BROWSER=webkit HEADED=true cucumber-js --profile ui",
+    "test:ui:mobile": "VIEWPORT=mobile cucumber-js --profile ui",
+    "test:ui:mobile:headed": "VIEWPORT=mobile HEADED=true cucumber-js --profile ui",
+    "test:api": "cucumber-js --profile api"
+  },
+  "devDependencies": {
+    "@cucumber/cucumber": "^12.8.2",
+    "@faker-js/faker": "^10.4.0",
+    "@playwright/test": "^1.59.1",
+    "dotenv": "^17.4.2"
+  }
+}
