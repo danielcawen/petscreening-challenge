@@ -19,5 +19,11 @@
     "parallel": 2,
     "format": ["progress", "html:reports/api-report.html", "rerun:@rerun.txt"],
     "formatOptions": { "snippetInterface": "async-await" }
+  },
+  "rerun": {
+    "require": ["e2e/steps/**/*.js", "e2e/support/**/*.js"],
+    "parallel": 0,
+    "format": ["progress", "html:reports/rerun-report.html"],
+    "formatOptions": { "snippetInterface": "async-await" }
   }
 }

@@ -14,7 +14,7 @@
     "test:ui:mobile": "VIEWPORT=mobile cucumber-js --profile ui",
     "test:ui:mobile:headed": "VIEWPORT=mobile HEADED=true cucumber-js --profile ui",
     "test:api": "cucumber-js --profile api",
-    "test:rerun": "cucumber-js @rerun.txt"
+    "test:rerun": "cucumber-js @rerun.txt --profile rerun"
   },
   "devDependencies": {
     "@cucumber/cucumber": "^12.8.2",
