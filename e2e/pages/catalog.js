@@ -5,6 +5,14 @@ const bottomBar = ".sticky.bottom-0"; // TODO: verify selector
 const productCard = ".rounded-2xl"; // TODO: verify selector
 const productCardHeading = "h3";
 const paginationButton = (n) => `button[aria-label="Page ${n}"]`;
+const catalogHeading = "h1";
+const catalogHeadingText = "Fresh Pies, Delivered by Drone";
+const catalogMain = "main";
+
+export async function verifyOnCatalogPage(page) {
+  await expect(page.locator(catalogHeading)).toHaveText(catalogHeadingText);
+  await expect(page.locator(catalogMain)).toBeVisible();
+}
 
 export async function addToCart(page, productName) {
   const card = page

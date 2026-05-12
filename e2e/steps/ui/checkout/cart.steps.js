@@ -1,6 +1,7 @@
 import { Given, When, Then } from "@cucumber/cucumber";
 import { expect } from "@playwright/test";
 import * as cartPage from "../../../pages/checkout/cart.js";
+import * as catalogPage from "../../../pages/catalog.js";
 import { FRONTEND_URL } from "../../../support/env.js";
 
 const PRODUCT_CATALOG = {
@@ -66,4 +67,5 @@ Then("the line totals and subtotal should reflect correct math", async function 
 
 Then("I should be redirected to the catalog page", async function () {
   await this.page.waitForURL(`${FRONTEND_URL}/`, { timeout: 8_000 });
+  await catalogPage.verifyOnCatalogPage(this.page);
 });
