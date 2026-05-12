@@ -26,6 +26,16 @@ export async function verifyOrderSummaryRow(page, labelContains, expectedAmount)
   await expect(locator).toHaveText(expectedAmount);
 }
 
+// Waits for the Delivery row to show a dollar amount — use before reading all fee rows
+// to avoid a race where allTextContents() snapshots the DOM before the async fee update.
+export async function waitForDeliveryRow(page) {
+  const deliveryAmount = getOrderSummaryCard(page)
+    .locator(summaryRow)
+    .filter({ hasText: "Delivery" })
+    .locator("span.font-medium");
+  await expect(deliveryAmount).toHaveText(/\$\d/);
+}
+
 // Returns the grand total text (e.g. "$42.00") from the bottom of the Order Summary card.
 export async function getGrandTotal(page) {
   return getOrderSummaryCard(page).locator(grandTotalSpan).last().textContent();

@@ -26,6 +26,7 @@ Then("the Order Summary items row should show the correct subtotal", async funct
 // shown on the page. This keeps the assertion resilient to both product price changes and
 // billing rule changes.
 Then("the Order Summary grand total should be correct", async function () {
+  await orderSummaryPage.waitForDeliveryRow(this.page);
   const subtotal = computeSubtotal(this.cartItems);
   const feeTexts = await orderSummaryPage
     .getOrderSummaryCard(this.page)
