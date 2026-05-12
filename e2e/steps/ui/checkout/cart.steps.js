@@ -29,19 +29,23 @@ const PRODUCT_CATALOG = {
 Given("I have {string} in my cart with quantity {int}", async function (productName, qty) {
   const product = PRODUCT_CATALOG[productName];
   this.cartItems = [{ product, quantity: qty }];
-  await this.page.goto(FRONTEND_URL);
-  await cartPage.setCartInSession(this.page, this.cartItems);
 });
 
 Given("I also have {string} in my cart with quantity {int}", async function (productName, qty) {
   const product = PRODUCT_CATALOG[productName];
   this.cartItems = [...(this.cartItems ?? []), { product, quantity: qty }];
-  await cartPage.setCartInSession(this.page, this.cartItems);
 });
 
 Given("I am on the checkout page", async function () {
-  await this.page.goto(`${FRONTEND_URL}/checkout`);
-  await this.page.locator("text=Your Order").waitFor({ timeout: 10_000 });
+  // Inject cart into sessionStorage before React runs so CartProvider hydrates with items.
+  // Then use the header's cart link (client-side nav) so CartProvider stays mounted and
+  // CheckoutPage never sees an empty cart — avoiding the empty-cart redirect race condition.
+  await this.page.addInitScript((data) => {
+    sessionStorage.setItem("pits_cart", JSON.stringify(data));
+  }, { items: this.cartItems });
+  await this.page.goto(FRONTEND_URL);
+  await cartPage.clickCheckoutLink(this.page);
+  await cartPage.waitForCheckoutReady(this.page);
 });
 
 When("I increment the quantity of {string}", async function (productName) {

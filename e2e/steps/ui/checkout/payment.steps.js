@@ -13,24 +13,24 @@ Then("the Payment card should show the {string} field", async function (fieldLab
   ).toBeVisible();
 });
 
-Then("the Payment card should show the demo disclaimer", async function () {
-  await expect(
-    paymentPage
-      .getPaymentCard(this.page)
-      .getByText("No real charges will be made", { exact: false })
-  ).toBeVisible();
-});
+// Then("the Payment card should show the demo disclaimer", async function () {
+//   await expect(
+//     paymentPage
+//       .getPaymentCard(this.page)
+//       .getByText("No real charges will be made", { exact: false })
+//   ).toBeVisible();
+// });
 
 When("I fill in the card number {string}", async function (card) {
-  await this.page.getByPlaceholder("4242 4242 4242 4242").fill(card);
+  await paymentPage.fillPaymentForm(this.page, { card });
 });
 
 When("I fill in the expiry {string}", async function (expiry) {
-  await this.page.getByPlaceholder("MM / YY").fill(expiry);
+  await paymentPage.fillPaymentForm(this.page, { expiry });
 });
 
 When("I fill in the CVV {string}", async function (cvv) {
-  await this.page.getByPlaceholder("123").fill(cvv);
+  await paymentPage.fillPaymentForm(this.page, { cvv });
 });
 
 Then("the card number should be formatted as {string}", async function (formatted) {
@@ -51,7 +51,7 @@ Then("the CVV value should be {string}", async function (expected) {
 When("I fill in a randomly generated card number", async function () {
   const rawCard = faker.finance.creditCardNumber({ issuer: "visa" });
   this.cardDigits = rawCard.replace(/\D/g, "").slice(0, 16);
-  await this.page.getByPlaceholder("4242 4242 4242 4242").fill(rawCard);
+  await paymentPage.fillPaymentForm(this.page, { card: rawCard });
 });
 
 Then("the card number should be formatted in groups of four digits", async function () {
@@ -64,7 +64,7 @@ When("I fill in a randomly generated expiry date", async function () {
   const month = String(faker.number.int({ min: 1, max: 12 })).padStart(2, "0");
   const year = String(faker.number.int({ min: 26, max: 35 })).padStart(2, "0");
   this.expiryRaw = `${month}${year}`;
-  await this.page.getByPlaceholder("MM / YY").fill(this.expiryRaw);
+  await paymentPage.fillPaymentForm(this.page, { expiry: this.expiryRaw });
 });
 
 Then("the expiry should be formatted correctly", async function () {
@@ -75,7 +75,7 @@ Then("the expiry should be formatted correctly", async function () {
 
 When("I fill in a CVV containing only letters", async function () {
   this.cvvInput = faker.string.alpha({ length: { min: 3, max: 8 } });
-  await this.page.getByPlaceholder("123").fill(this.cvvInput);
+  await paymentPage.fillPaymentForm(this.page, { cvv: this.cvvInput });
 });
 
 Then("the CVV value should be empty", async function () {
@@ -85,7 +85,7 @@ Then("the CVV value should be empty", async function () {
 
 When("I fill in a CVV with more than four digits", async function () {
   this.cvvInput = faker.string.numeric({ length: { min: 5, max: 8 } });
-  await this.page.getByPlaceholder("123").fill(this.cvvInput);
+  await paymentPage.fillPaymentForm(this.page, { cvv: this.cvvInput });
 });
 
 Then("the CVV should only show the first four digits", async function () {

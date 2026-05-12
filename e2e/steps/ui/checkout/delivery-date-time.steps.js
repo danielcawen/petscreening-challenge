@@ -23,10 +23,13 @@ function getNextWeekday() {
 }
 
 function getNextSaturday() {
+  // The app parses date strings as UTC midnight (known timezone bug in DateTimePicker).
+  // UTC Sunday midnight is always Saturday or Sunday in local time, so isWeekend() returns
+  // true everywhere regardless of UTC offset.
   const d = new Date();
-  const daysUntilSat = (6 - d.getDay() + 7) % 7 || 7;
-  d.setDate(d.getDate() + daysUntilSat);
-  return formatLocalDate(d);
+  const daysUntilSun = (7 - d.getUTCDay()) % 7 || 7;
+  d.setUTCDate(d.getUTCDate() + daysUntilSun);
+  return `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, "0")}-${String(d.getUTCDate()).padStart(2, "0")}`;
 }
 
 When("I set the delivery date to yesterday", async function () {

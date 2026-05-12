@@ -14,7 +14,8 @@ When("I enter a short random delivery instruction", async function () {
 
 Then("the character counter should show the correct count", async function () {
   const expected = `${this.instructionText.length}/200 characters`;
-  await expect(this.page.getByText(expected)).toBeVisible();
+  const text = await deliveryInstructionsPage.getCharCounterText(this.page);
+  expect(text.trim()).toBe(expected);
 });
 
 When("I enter random delivery instructions", async function () {
@@ -38,7 +39,7 @@ Then("the character counter should be within the 200-character limit", async fun
 });
 
 Then("no character limit warning should be shown", async function () {
-  await expect(this.page.getByText("Instructions too long", { exact: false })).not.toBeVisible();
+  await deliveryInstructionsPage.verifyNoCharLimitWarning(this.page);
 });
 
 Then("the character counter should show more than 200 characters used", async function () {
@@ -47,5 +48,5 @@ Then("the character counter should show more than 200 characters used", async fu
 });
 
 Then("I should see a character limit warning", async function () {
-  await expect(this.page.getByText("Instructions too long", { exact: false })).toBeVisible();
+  await deliveryInstructionsPage.verifyCharLimitWarningVisible(this.page);
 });

@@ -48,8 +48,7 @@ Then("I should see the correct {int}% tip hint", async function (percent) {
 
 Then("the tip in the Order Summary should reflect {int}%", async function (percent) {
   const tip = computeSubtotal(this.cartItems) * (percent / 100);
-  const text = await orderSummaryPage.getOrderSummaryRowAmount(this.page, "Tip");
-  expect(text.trim()).toBe(formatMoney(tip));
+  await orderSummaryPage.verifyOrderSummaryRow(this.page, "Tip", formatMoney(tip));
 });
 
 Then("the Order Summary grand total should reflect a {int}% tip", async function (percent) {
@@ -87,7 +86,7 @@ Then("the Order Summary should not show a tip line", async function () {
 });
 
 Then("the custom tip input should be visible", async function () {
-  await expect(this.page.getByPlaceholder("0.00")).toBeVisible();
+  await tipPage.verifyCustomTipInputVisible(this.page);
 });
 
 Then("I should see a validation error {string}", async function (message) {

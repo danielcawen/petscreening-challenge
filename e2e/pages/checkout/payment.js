@@ -13,7 +13,7 @@ export async function fillPaymentForm(page, { name, card, expiry, cvv } = {}) {
   if (name !== undefined) await page.getByPlaceholder(cardholderNamePlaceholder).fill(name);
   if (card !== undefined) await page.getByPlaceholder(cardNumberPlaceholder).fill(card);
   if (expiry !== undefined) await page.getByPlaceholder(expiryPlaceholder).fill(expiry);
-  if (cvv !== undefined) await page.getByPlaceholder(cvvPlaceholder).fill(cvv);
+  if (cvv !== undefined) await page.getByPlaceholder(cvvPlaceholder, { exact: true }).fill(cvv);
 }
 
 export async function getCardNumberValue(page) {
@@ -25,5 +25,5 @@ export async function getExpiryValue(page) {
 }
 
 export async function getCvvValue(page) {
-  return page.getByPlaceholder(cvvPlaceholder).inputValue();
+  return page.getByPlaceholder(cvvPlaceholder, { exact: true }).inputValue();
 }

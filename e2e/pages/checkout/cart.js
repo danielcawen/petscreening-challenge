@@ -8,12 +8,18 @@ const qtyDisplay = ".flex.items-center.gap-2.mt-1 span";
 const qtyButton = ".flex.items-center.gap-2.mt-1 button";
 const subtotalAmount = ".pt-3.mt-3 span.font-medium";
 const removeItemTag = "button";
+const checkoutHeaderLink = 'a[href="/checkout"]';
 
-export async function setCartInSession(page, items) {
-  await page.evaluate(
-    (data) => sessionStorage.setItem("pits_cart", JSON.stringify(data)),
-    { items }
-  );
+// Waits for at least one item row — confirms cart is hydrated and no redirect has occurred.
+export async function waitForCheckoutReady(page) {
+  await page.locator(cartSection).locator(itemRow).first().waitFor({ timeout: 10_000 });
+}
+
+// Clicks the cart icon in the header (client-side navigation) so CartProvider stays mounted.
+export async function clickCheckoutLink(page) {
+  await page.locator(checkoutHeaderLink).waitFor({ timeout: 10_000 });
+  await page.locator(checkoutHeaderLink).click();
+  await page.waitForURL("**/checkout", { timeout: 10_000 });
 }
 
 // Reads all item rows, verifies (unit_price × displayed_qty === displayed_line_total)

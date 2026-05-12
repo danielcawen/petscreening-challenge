@@ -1,3 +1,5 @@
+import { expect } from "@playwright/test";
+
 const sectionContainer = "div.space-y-3";
 const customTipPlaceholder = "0.00";
 const tipHint = "p.text-xs";
@@ -34,6 +36,10 @@ export async function getNoTipBackground(page) {
   return tipSection(page)
     .getByRole("button", { name: "No tip" })
     .evaluate((el) => el.style.background);
+}
+
+export async function verifyCustomTipInputVisible(page) {
+  await expect(page.getByPlaceholder(customTipPlaceholder)).toBeVisible();
 }
 
 // Returns the hint text shown below preset buttons, e.g. "$4.80 tip".

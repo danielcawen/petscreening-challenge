@@ -15,5 +15,5 @@ Then("I should see the promo error {string}", async function (message) {
 });
 
 Then("the promo code {string} should appear as applied", async function (code) {
-  await expect(this.page.getByText(code)).toBeVisible();
+  await expect(this.page.getByText(code, { exact: true })).toBeVisible();
 });

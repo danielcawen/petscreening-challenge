@@ -13,19 +13,19 @@ Then("the {string} location mode should be active", async function (mode) {
 });
 
 Then("an address input field should be visible", async function () {
-  await expect(this.page.getByPlaceholder("Enter your address")).toBeVisible();
+  await deliveryLocationPage.verifyAddressInputVisible(this.page);
 });
 
 Then("a {string} button should be visible", async function (label) {
-  await expect(this.page.getByRole("button", { name: label })).toBeVisible();
+  await deliveryLocationPage.verifyLocationButtonVisible(this.page, label);
 });
 
 Then("a distance input field should be visible", async function () {
-  await expect(this.page.getByPlaceholder("e.g. 10.5")).toBeVisible();
+  await deliveryLocationPage.verifyDistanceInputVisible(this.page);
 });
 
 Then("a distance slider should be visible", async function () {
-  await expect(this.page.locator("input[type='range']")).toBeVisible();
+  await deliveryLocationPage.verifyDistanceSliderVisible(this.page);
 });
 
 When("I enter a distance of {string} km", async function (distance) {

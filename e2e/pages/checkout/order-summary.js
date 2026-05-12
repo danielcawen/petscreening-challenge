@@ -1,3 +1,5 @@
+import { expect } from "@playwright/test";
+
 const summaryCard = ".rounded-2xl.p-6.space-y-4";
 // Line item rows (items, delivery, promo, tip) — excludes the grand-total row
 const summaryRow = ".space-y-2 .flex.justify-between.items-center.text-sm";
@@ -13,6 +15,15 @@ export async function getOrderSummaryRowAmount(page, labelContains) {
     .locator(summaryRow)
     .filter({ hasText: labelContains });
   return row.locator("span.font-medium").textContent();
+}
+
+// Auto-retrying assertion for a row amount — use when the row value may update asynchronously.
+export async function verifyOrderSummaryRow(page, labelContains, expectedAmount) {
+  const locator = getOrderSummaryCard(page)
+    .locator(summaryRow)
+    .filter({ hasText: labelContains })
+    .locator("span.font-medium");
+  await expect(locator).toHaveText(expectedAmount);
 }
 
 // Returns the grand total text (e.g. "$42.00") from the bottom of the Order Summary card.

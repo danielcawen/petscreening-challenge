@@ -1,9 +1,14 @@
 # petscreening-challenge
 PetScreening’s Challenge
 
+## Requirements
+
+- Node.js 24+ (required by pnpm v11)
+
 ## Installation
 
 ```bash
+nvm use 24 # if using nvm
 cp config/.env.example config/.env.local
 pnpm install
 pnpm exec playwright install chromium firefox webkit
@@ -56,6 +61,21 @@ Env vars compose freely:
 
 ```bash
 BROWSER=webkit VIEWPORT=mobile HEADED=true pnpm test:ui
+```
+
+### Re-running failed scenarios
+
+After any test run, failed scenario locations are written to `@rerun.txt`. To re-run only those:
+
+```bash
+pnpm test:rerun
+```
+
+Pass `--profile` to keep the correct step definitions in scope when re-running a specific layer:
+
+```bash
+pnpm cucumber-js @rerun.txt --profile ui
+pnpm cucumber-js @rerun.txt --profile api
 ```
 
 ### Targeting specific tests
