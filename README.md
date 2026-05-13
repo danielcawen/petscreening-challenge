@@ -97,5 +97,11 @@ pnpm cucumber-js --name "Successful login"
 They are located at `/reports`
 If a test fails a video and screenshot are attached to the report
 
+### What to do next?
+
+- Expand the API tests: validate contacts, verify other endpoints, etc
+- Add a DB integration
+- Expand UI tests: add missing sections: rewards program, tracking orders, etc
+
 ### Notes:
 - TODO: verify if this is needed `git update-index --skip-worktree @rerun.tx`
