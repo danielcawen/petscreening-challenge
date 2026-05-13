@@ -10,4 +10,5 @@ Thumbs.db
 .claude
 .mcp.json
 .vscode
-petscreening-challenge.code-workspace.playwright-mcp
+petscreening-challenge.code-workspace
+.playwright-mcp
