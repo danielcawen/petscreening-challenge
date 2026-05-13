@@ -1,7 +1,6 @@
 {
   "default": {
     "require": ["e2e/steps/**/*.js", "e2e/support/**/*.js"],
-    "paths": ["e2e/features/**/*.feature"],
     "parallel": 0,
     "format": ["progress", "html:reports/cucumber-report.html", "rerun:@rerun.txt"],
     "formatOptions": { "snippetInterface": "async-await" }

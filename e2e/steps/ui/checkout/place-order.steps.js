@@ -21,7 +21,7 @@ When("I fill in the payment form with valid details", async function () {
   });
 });
 
-When("I click the Place Order button", async function () {
+When("I place the order", async function () {
   await placeOrderPage.clickPlaceOrder(this.page);
 });
 
@@ -40,6 +40,10 @@ Then("I should be on the confirmation page", async function () {
 
 Then("the confirmation should show a valid order ID", async function () {
   const orderId = await confirmationPage.getOrderId(this.page);
+  // TODO: understand what is the expected order id, all the previous
+  // order ids are PIE-{6 alphanumeric} and the new ones are:
+  // PITS-{8 digits}-{4 alphanumeric}
+  // The new ones are not displayed in the order history
   expect(orderId.trim()).toMatch(/^PITS-\d{8}-[A-Z0-9]{4}$/);
 });
 

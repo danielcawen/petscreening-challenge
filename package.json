@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "cucumber-js",
+    "test": "cucumber-js 'e2e/features/**/*.feature'",
     "test:ui": "cucumber-js --profile ui",
     "test:ui:headed": "HEADED=true cucumber-js --profile ui",
     "test:ui:firefox": "BROWSER=firefox cucumber-js --profile ui",

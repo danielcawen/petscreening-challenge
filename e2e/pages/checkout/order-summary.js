@@ -31,7 +31,7 @@ export async function verifyOrderSummaryRow(page, labelContains, expectedAmount)
 export async function waitForDeliveryRow(page) {
   const deliveryAmount = getOrderSummaryCard(page)
     .locator(summaryRow)
-    .filter({ hasText: "Delivery" })
+    .filter({ hasText: /delivery/ })
     .locator("span.font-medium");
   await expect(deliveryAmount).toHaveText(/\$\d/);
 }

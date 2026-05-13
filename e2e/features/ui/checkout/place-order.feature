@@ -17,23 +17,23 @@ Feature: Place order
 
   Scenario: Successfully placing an order redirects to the confirmation page
     When I fill in the payment form with valid details
-    And I click the Place Order button
+    And I place the order
     Then I should be on the confirmation page
 
   Scenario: Confirmation page shows a valid order ID
     When I fill in the payment form with valid details
-    And I click the Place Order button
+    And I place the order
     Then I should be on the confirmation page
     And the confirmation should show a valid order ID
 
   Scenario: Confirmation page shows the ordered item
     When I fill in the payment form with valid details
-    And I click the Place Order button
+    And I place the order
     Then I should be on the confirmation page
     And the confirmation should mention "Signature Cherry Lattice"
 
   Scenario: Confirmation grand total matches the billing breakdown
     When I fill in the payment form with valid details
-    And I click the Place Order button
+    And I place the order
     Then I should be on the confirmation page
     And the confirmation grand total should be correct

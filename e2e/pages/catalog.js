@@ -1,8 +1,8 @@
 import { expect } from "@playwright/test";
 
 const headerCartBadge = 'a[href="/checkout"] span';
-const bottomBar = ".sticky.bottom-0"; // TODO: verify selector
-const productCard = ".rounded-2xl"; // TODO: verify selector
+const bottomBar = ".sticky.bottom-0";
+const productCard = ".rounded-2xl";
 const productCardHeading = "h3";
 const paginationButton = (n) => `button[aria-label="Page ${n}"]`;
 const catalogHeading = "h1";

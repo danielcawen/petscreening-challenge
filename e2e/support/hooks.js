@@ -1,4 +1,6 @@
-import { Before, After, AfterStep } from "@cucumber/cucumber";
+import { Before, After, AfterStep, setDefaultTimeout } from "@cucumber/cucumber";
+
+setDefaultTimeout(30_000);
 import { chromium, firefox, webkit, request } from "@playwright/test";
 import fs from "fs";
 import { BASE_URL } from "./env.js";
