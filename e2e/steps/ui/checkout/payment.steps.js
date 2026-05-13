@@ -13,14 +13,6 @@ Then("the Payment card should show the {string} field", async function (fieldLab
   ).toBeVisible();
 });
 
-// Then("the Payment card should show the demo disclaimer", async function () {
-//   await expect(
-//     paymentPage
-//       .getPaymentCard(this.page)
-//       .getByText("No real charges will be made", { exact: false })
-//   ).toBeVisible();
-// });
-
 When("I fill in the card number {string}", async function (card) {
   await paymentPage.fillPaymentForm(this.page, { card });
 });

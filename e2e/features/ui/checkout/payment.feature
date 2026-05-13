@@ -17,9 +17,6 @@ Feature: Payment form
     And the Payment card should show the "Expiry" field
     And the Payment card should show the "CVV" field
 
-  # Scenario: Payment card shows the demo disclaimer
-  #   Then the Payment card should show the demo disclaimer
-
   Scenario: Card number is formatted with groups of four digits
     When I fill in a randomly generated card number
     Then the card number should be formatted in groups of four digits
