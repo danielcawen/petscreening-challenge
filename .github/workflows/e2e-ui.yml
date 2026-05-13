@@ -1,0 +1,79 @@
+name: E2E UI Tests
+
+on:
+  workflow_dispatch:
+    inputs:
+      browser:
+        description: Browser to run tests in
+        required: false
+        default: chromium
+        type: choice
+        options:
+          - chromium
+          - firefox
+          - webkit
+      viewport:
+        description: Viewport size
+        required: false
+        default: desktop
+        type: choice
+        options:
+          - desktop
+          - mobile
+
+jobs:
+  test-ui:
+    name: UI Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: latest
+
+      - name: Install test dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps ${{ inputs.browser }}
+
+      - name: Checkout app
+        uses: actions/checkout@v4
+        with:
+          repository: danielcawen/pie-in-the-sky
+          path: app
+
+      - name: Install app dependencies
+        working-directory: app
+        run: npm ci
+
+      - name: Build app
+        working-directory: app
+        run: npm run build
+
+      - name: Start app
+        working-directory: app
+        run: npm start &
+
+      - name: Wait for app
+        run: |
+          for i in $(seq 1 30); do curl -sf http://localhost:3000 && break; sleep 3; done
+
+      - name: Run UI tests
+        run: pnpm test:ui
+        env:
+          BROWSER: ${{ inputs.browser }}
+          VIEWPORT: ${{ inputs.viewport }}
+
+      - name: Upload reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-reports
+          path: reports/
