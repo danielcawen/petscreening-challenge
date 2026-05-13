@@ -1,5 +1,7 @@
 const sectionContainer = "div.space-y-3";
 
+export const INACTIVE_BACKGROUND = "var(--bg-raised)";
+
 function weatherSection(page) {
   // Scope to the div containing the "Weather simulation" label to avoid false matches
   return page.locator(sectionContainer).filter({ hasText: "Weather simulation" });

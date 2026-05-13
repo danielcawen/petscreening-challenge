@@ -1,6 +1,9 @@
 import { expect } from "@playwright/test";
 
 const sectionContainer = "div.space-y-3";
+
+export const ACTIVE_BACKGROUND = "var(--action)";
+export const INACTIVE_BACKGROUND = "var(--bg-raised)";
 const customTipPlaceholder = "0.00";
 const tipHint = "p.text-xs";
 

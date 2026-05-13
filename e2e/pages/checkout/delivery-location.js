@@ -1,5 +1,7 @@
 import { expect } from "@playwright/test";
 
+export const ACTIVE_BACKGROUND = "var(--action)";
+
 const addressInputPlaceholder = "Enter your address";
 const manualDistancePlaceholder = "e.g. 10.5";
 const distanceSlider = "input[type='range']";

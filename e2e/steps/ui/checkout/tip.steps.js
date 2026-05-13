@@ -22,17 +22,17 @@ When("I enter a custom tip amount of {string}", async function (amount) {
 
 Then("the {int}% tip button should be active", async function (percent) {
   const background = await tipPage.getTipPresetBackground(this.page, percent);
-  expect(background).toBe("var(--action)");
+  expect(background).toBe(tipPage.ACTIVE_BACKGROUND);
 });
 
 Then("the {int}% tip button should be inactive", async function (percent) {
   const background = await tipPage.getTipPresetBackground(this.page, percent);
-  expect(background).toBe("var(--bg-raised)");
+  expect(background).toBe(tipPage.INACTIVE_BACKGROUND);
 });
 
 Then("the no tip button should be active", async function () {
   const background = await tipPage.getNoTipBackground(this.page);
-  expect(background).toBe("var(--action)");
+  expect(background).toBe(tipPage.ACTIVE_BACKGROUND);
 });
 
 Then("I should see a tip hint of {string}", async function (hint) {
