@@ -8,8 +8,8 @@ When("I select the {string} location mode", async function (mode) {
 });
 
 Then("the {string} location mode should be active", async function (mode) {
-  const bg = await deliveryLocationPage.getLocationModeBackground(this.page, mode);
-  expect(bg).toBe("var(--action)");
+  const background = await deliveryLocationPage.getLocationModeBackground(this.page, mode);
+  expect(background).toBe("var(--action)");
 });
 
 Then("an address input field should be visible", async function () {

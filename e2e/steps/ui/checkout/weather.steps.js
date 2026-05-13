@@ -7,12 +7,12 @@ When("I select the {string} weather", async function (weather) {
 });
 
 Then("the {string} weather option should be active", async function (weather) {
-  const bg = await weatherPage.getWeatherBackground(this.page, weather);
+  const background = await weatherPage.getWeatherBackground(this.page, weather);
   // Active Clear uses var(--action); active Raining uses var(--sky-500)
-  expect(bg).not.toBe("var(--bg-raised)");
+  expect(background).not.toBe("var(--bg-raised)");
 });
 
 Then("the {string} weather option should be inactive", async function (weather) {
-  const bg = await weatherPage.getWeatherBackground(this.page, weather);
-  expect(bg).toBe("var(--bg-raised)");
+  const background = await weatherPage.getWeatherBackground(this.page, weather);
+  expect(background).toBe("var(--bg-raised)");
 });

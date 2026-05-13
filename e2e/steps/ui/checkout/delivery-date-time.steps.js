@@ -3,33 +3,33 @@ import { expect } from "@playwright/test";
 import * as deliveryDateTimePage from "../../../pages/checkout/delivery-date-time.js";
 
 function formatLocalDate(date) {
-  const y = date.getFullYear();
-  const m = String(date.getMonth() + 1).padStart(2, "0");
-  const d = String(date.getDate()).padStart(2, "0");
-  return `${y}-${m}-${d}`;
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
 }
 
 function getYesterday() {
-  const d = new Date();
-  d.setDate(d.getDate() - 1);
-  return formatLocalDate(d);
+  const date = new Date();
+  date.setDate(date.getDate() - 1);
+  return formatLocalDate(date);
 }
 
 function getNextWeekday() {
-  const d = new Date();
-  d.setDate(d.getDate() + 1);
-  while (d.getDay() === 0 || d.getDay() === 6) d.setDate(d.getDate() + 1);
-  return formatLocalDate(d);
+  const date = new Date();
+  date.setDate(date.getDate() + 1);
+  while (date.getDay() === 0 || date.getDay() === 6) date.setDate(date.getDate() + 1);
+  return formatLocalDate(date);
 }
 
 function getNextSaturday() {
   // The app parses date strings as UTC midnight (known timezone bug in DateTimePicker).
   // UTC Sunday midnight is always Saturday or Sunday in local time, so isWeekend() returns
   // true everywhere regardless of UTC offset.
-  const d = new Date();
-  const daysUntilSun = (7 - d.getUTCDay()) % 7 || 7;
-  d.setUTCDate(d.getUTCDate() + daysUntilSun);
-  return `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, "0")}-${String(d.getUTCDate()).padStart(2, "0")}`;
+  const date = new Date();
+  const daysUntilSun = (7 - date.getUTCDay()) % 7 || 7;
+  date.setUTCDate(date.getUTCDate() + daysUntilSun);
+  return `${date.getUTCFullYear()}-${String(date.getUTCMonth() + 1).padStart(2, "0")}-${String(date.getUTCDate()).padStart(2, "0")}`;
 }
 
 When("I set the delivery date to yesterday", async function () {
