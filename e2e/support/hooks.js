@@ -9,7 +9,7 @@ const browsers = { chromium, firefox, webkit };
 
 const viewports = {
   desktop: { width: 1280, height: 720 },
-  mobile: { width: 390, height: 844 },
+  mobile: { width: 375, height: 667 },
 };
 
 Before({ tags: "@ui" }, async function () {

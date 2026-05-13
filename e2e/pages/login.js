@@ -3,7 +3,7 @@ import { expect } from "@playwright/test";
 const emailInput = "#email";
 const passwordInput = "#password";
 const submitButton = "button[type='submit']";
-const errorMessage = ".p-3.rounded-lg.text-sm"; // TODO: check element
+const errorMessage = ".p-3.rounded-lg.text-sm";
 
 export async function fillEmail(page, email) {
   await page.fill(emailInput, email);

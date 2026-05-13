@@ -48,7 +48,7 @@ HEADED=true pnpm test:ui
 
 ### Viewport
 
-Default is desktop (1280×720). Use `VIEWPORT=mobile` for 390×844:
+Default is desktop (1280×720). Use `VIEWPORT=mobile` for 375×667:
 
 ```bash
 pnpm test:ui:mobile
@@ -91,3 +91,11 @@ Run scenarios matching a name:
 ```bash
 pnpm cucumber-js --name "Successful login"
 ```
+
+### Reports
+
+They are located at `/reports`
+If a test fails a video and screenshot are attached to the report
+
+### Notes:
+- TODO: verify if this is needed `git update-index --skip-worktree @rerun.tx`

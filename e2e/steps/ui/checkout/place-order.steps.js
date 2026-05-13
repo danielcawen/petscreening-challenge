@@ -23,6 +23,8 @@ When("I fill in the payment form with valid details", async function () {
 
 When("I place the order", async function () {
   await placeOrderPage.clickPlaceOrder(this.page);
+  await this.page.waitForURL(`${FRONTEND_URL}/confirmation`, { timeout: 15_000 });
+  await confirmationPage.verifyOnConfirmationPage(this.page);
 });
 
 Then("the Place Order button should be disabled", async function () {
